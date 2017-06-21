@@ -5,12 +5,13 @@ import './css/Header.css';
 import { Movie } from './components/Movie';
 import { Header } from './components/Header';
 import { FilterBar } from './components/FilterBar';
+import { SideBar } from './components/SideBar';
 
 export class App extends Component {
   state = {
     movies,
     filters,
-    sidebarOpened: false
+    sideBarOpened: false
   };
 
   selectTab = (category) => {
@@ -20,14 +21,15 @@ export class App extends Component {
   };
 
   openSideBar = () => {
-    console.log('toggle side bar');
     // We need to toggle the state of the sidebar here to make sure it is in an open state
-    this.setState({sidebarOpened: !this.state.sidebarOpened})
+    this.setState({sideBarOpened: true})
   };
 
-  render() {
-    console.log(this.state.sidebarOpened);
-    
+  closeSideBar = () => {
+    this.setState({sideBarOpened: false})
+  }
+
+  render() {    
     return (
 
       <div>
@@ -38,30 +40,13 @@ export class App extends Component {
           <FilterBar filters={this.state.filters} selectTab={this.selectTab}/>
 
           {/*If the sidebar is open you need to add the css class filter-is-visible to the div below*/}
-          <section className={`gallery ${this.state.sidebarOpened ? 'filter-is-visible' : ''}`}>
+          <section className={`gallery ${this.state.sideBarOpened ? 'filter-is-visible' : ''}`}>
             {this.state.movies.map(movie =>
               <Movie key={movie.id} data={movie} />
             )}
           </section>
 
-          <div>
-            {/*If the sidebar is open you need to add the css class filter-is-visible to the div below*/}
-            <div className={`filter ${this.state.sidebarOpened ? 'filter-is-visible' : ''}`}>
-              <form onSubmit={e => e.preventDefault}>
-                <div className="filter-block">
-                  <h4>Search</h4>
-                  <div className="filter-content">
-                    <input type="search" placeholder="title" />
-                  </div>
-                </div>
-              </form>
-              <a className="hand-cursor close-f">Close</a>
-            </div>
-
-            <a
-              className="hand-cursor filter-trigger"
-              onClick={this.openSideBar}>Filters</a>
-          </div>
+          <SideBar openSideBar={this.openSideBar} closeSideBar={this.closeSideBar} sideBarOpened={this.state.sideBarOpened}/>
 
         </main>
         </div> 
