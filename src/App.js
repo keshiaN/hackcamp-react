@@ -17,7 +17,19 @@ export class App extends Component {
   selectTab = (category) => {
     console.log('test function selecttab - category ', category);
     // We need to update the `selected` property of the clicked category to be true.
+    this.setState({
+      filters: this.state.filters.map(filter => {
+        if (filter.category === category) {
+          filter.selected = true;
+        } else {
+          filter.selected = false;
+        }
+        return filter;
+      })
+    });
+
     // We should also filter the movies which are passed to the movie list
+    
   };
 
   openSideBar = () => {
