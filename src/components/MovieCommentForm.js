@@ -25,7 +25,6 @@ export class MovieCommentForm extends React.Component {
   //Second: We need to implement the function that will actually post the comment (on the url SERVER_URL/movies/MOVIEDID/comments)
   postComment = (event) => {
     event.preventDefault();
-    console.log('post comment ', this.state);
     fetch(SERVER_URL + '/movies/' + this.props.movieId + '/comments', {
       method: 'POST',
       headers: {
@@ -35,12 +34,9 @@ export class MovieCommentForm extends React.Component {
       body: JSON.stringify({
         author: this.state.author,
         content: this.state.content,
-      })}).then(() => this.props.getComments());
+      })}).then(() => this.props.getComments()); //Third: We also want to see our comment directly on the page, without refreshing the page
+      //Hint: We need to refetch all the comments in the parent when the post is done
   }
-
-  //Third: We also want to see our comment directly on the page, without refreshing the page
-  //Hint: We need to refetch all the comments in the parent when the post is done
-
 
   render() {
     return (

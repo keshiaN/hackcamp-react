@@ -6,12 +6,22 @@ import axios from 'axios';
 
 export class MovieComment extends React.Component {
   static propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.object.isRequired,
+    getComments: PropTypes.func.isRequired
   };
 
-  //We need to delete the Comment (by clicking on the X span)
-  //The url is SERVER_URL/comments/COMMENTID
-  //We also want to see the comment directly deleted, without refreshing the page
+  deleteComment = () => {
+    //We need to delete the Comment (by clicking on the X span)
+    //The url is SERVER_URL/comments/COMMENTID
+    fetch(SERVER_URL + '/comments/' + this.props.data.id, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }}).then(() => this.props.getComments());
+    //We also want to see the comment directly deleted, without refreshing the page
+  }
+ 
 
   render() {
     return (
@@ -22,7 +32,7 @@ export class MovieComment extends React.Component {
         <div>
           {this.props.data.content}
           <small className="right">
-            <span>X</span>
+            <span onClick={this.deleteComment}>X</span>
           </small>
         </div>
       </div>
