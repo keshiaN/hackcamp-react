@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import logo from './images/logo.svg';
 import movies from './mocks/movies.json';
 import filters from './mocks/filters';
 import './css/Header.css';
 import { Movie } from './components/Movie';
+import { Header } from './components/Header';
+import { FilterBar } from './components/FilterBar';
 
 export class App extends Component {
   state = {
@@ -12,7 +13,7 @@ export class App extends Component {
   };
 
   selectTab = (category) => {
-    console.log('category ', category);
+    console.log('test function selecttab - category ', category);
     // We need to update the `selected` property of the clicked category to be true.
     // We should also filter the movies which are passed to the movie list
   };
@@ -25,40 +26,11 @@ export class App extends Component {
     return (
 
       <div>
-        <header>
-          <img src="/images/logo.svg" alt="logo" />
-          <h1>Flix</h1>
-        </header>
+        <Header/>
 
         <main className="main-content">
 
-          <div className="tab-filter-wrapper">
-            <div className="tab-filter">
-
-              <ul>
-
-                <li className="placeholder">
-                  <a data-type="all" href="#0">All</a>
-                </li>
-
-                {this.state.filters.map(filter =>
-                  <li 
-                    key={filter.category}
-                    onClick={this.selectTab}>
-                    <a className={filter.selected ? 'selected' : ''}>
-                      {filter.category}
-                    </a>
-                  </li>
-                )}
-
-                <li className="counter">
-                  <a>42</a>
-                </li>
-
-              </ul>
-
-            </div>
-          </div>
+          <FilterBar filters={this.state.filters} selectTab={this.selectTab}/>
 
           {/*If the sidebar is open you need to add the css class filter-is-visible to the div below*/}
           <section className="gallery">
