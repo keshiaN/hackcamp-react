@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import movies from './mocks/movies.json';
 import filters from './mocks/filters';
+import genres from './mocks/genres';
 import './css/Header.css';
 import { Movie } from './components/Movie';
 import { Header } from './components/Header';
@@ -15,7 +16,6 @@ export class App extends Component {
   };
 
   selectTab = (category) => {
-    console.log('test function selecttab - category ', category);
     // We need to update the `selected` property of the clicked category to be true.
     this.setState({
       filters: this.state.filters.map(filter => {
@@ -29,8 +29,14 @@ export class App extends Component {
     });
 
     // We should also filter the movies which are passed to the movie list
-    
-  };
+    // ...movie => will create a new movie object and only replace the properties which you define afterwards
+    this.setState({
+      movies: this.state.movies.map(movie => ({
+          ...movie,
+          selected: category === 'All' ? true : movie.genre_ids.includes(genres[0].id)
+      }))
+    });
+  }
 
   openSideBar = () => {
     // We need to toggle the state of the sidebar here to make sure it is in an open state
