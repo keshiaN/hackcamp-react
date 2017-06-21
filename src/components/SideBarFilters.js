@@ -18,10 +18,10 @@ export const SideBarFilters = ({
             </div>
           </div>
         </form>
-        <a className="hand-cursor close-f" onClick={closeSideBar()}>Close</a>
+        <a className="hand-cursor close-f" onClick={closeSideBar}>Close</a>
       </div>
 
-      <a className="hand-cursor filter-trigger" onClick={openSideBar()}>
+      <a className="hand-cursor filter-trigger" onClick={openSideBar}>
         Filters
       </a>
     </div>

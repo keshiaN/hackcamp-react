@@ -51,6 +51,7 @@ export class Main extends React.Component {
   }
 
   render() {
+    // extract properties from the state object and declare them to all listed variabled listed
     const {filters, navClosed, selectedFilter, searchValue} = this.state;
 
     const {addToCart, isInCart, removeFromCart, movies} = this.props;
@@ -59,13 +60,13 @@ export class Main extends React.Component {
       <main className="main-content">
 
         <FilterMenu
-          counter={{this.state.counter}}
+          counter={this.state.counter}
           filters={filters}
-          selectTab={selectTab}
+          selectTab={this.selectTab}
         />
 
         <MovieList
-          updateCounter={updateCounter}
+          updateCounter={this.updateCounter}
           removeFromCart={removeFromCart}
           addToCart={addToCart}
           isInCart={isInCart}
@@ -77,10 +78,10 @@ export class Main extends React.Component {
         />
 
         <SideBarFilters
-          navClosed="navClosed"
-          closeSideBar={closeSideBar}
-          onChange={search}
-          openSideBar={openSideBar}
+          navClosed={navClosed}
+          closeSideBar={this.closeSideBar}
+          onChange={this.search}
+          openSideBar={this.openSideBar}
         />
       </main>
     );

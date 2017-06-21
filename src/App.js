@@ -16,6 +16,7 @@ export class App extends Component {
 
   componentDidMount() {
     //We need to fetch the movies (at the url SERVER_URL/movies)
+    fetch(SERVER_URL + '/movies').then((response) => response.json()).then(data => console.log('data'));
     //And then update the state with the movies
   }
 
