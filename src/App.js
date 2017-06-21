@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from './images/logo.svg';
 import movies from './mocks/movies.json';
 import filters from './mocks/filters';
 import './css/Header.css';
-import {Movie} from './components/Movie';
+import { Movie } from './components/Movie';
 
 export class App extends Component {
   state = {
@@ -11,7 +11,8 @@ export class App extends Component {
     filters
   };
 
-  selectTab = category => {
+  selectTab = (category) => {
+    console.log('category ', category);
     // We need to update the `selected` property of the clicked category to be true.
     // We should also filter the movies which are passed to the movie list
   };
@@ -23,9 +24,9 @@ export class App extends Component {
   render() {
     return (
 
-
+      <div>
         <header>
-          <img src=logo alt="logo" />
+          <img src="/images/logo.svg" alt="logo" />
           <h1>Flix</h1>
         </header>
 
@@ -41,7 +42,9 @@ export class App extends Component {
                 </li>
 
                 {this.state.filters.map(filter =>
-                  <li onClick={() => this.selectTab()}>
+                  <li 
+                    key={filter.category}
+                    onClick={this.selectTab}>
                     <a className={filter.selected ? 'selected' : ''}>
                       {filter.category}
                     </a>
@@ -60,7 +63,7 @@ export class App extends Component {
           {/*If the sidebar is open you need to add the css class filter-is-visible to the div below*/}
           <section className="gallery">
             {this.state.movies.map(movie =>
-              <Movie data={movie} />
+              <Movie key={movie.id} data={movie} />
             )}
           </section>
 
@@ -80,13 +83,14 @@ export class App extends Component {
 
             <a
               className="hand-cursor filter-trigger"
-              [onClick]={[[[{"this.openSideBar"}]]]}
+              onClick={this.openSideBar}
             >
               Filters
             </a>
           </div>
 
         </main>
+        </div> 
 
     );
   }
