@@ -18,6 +18,13 @@ export class MovieComments extends React.Component {
   componentDidMount() {
     //Here we need to fetch the comments on a certain movie (the url is SERVER_URL/movies/MOVIEID/comments)
     //The id of that movie is in the props
+    // fetch(SERVER_URL + '/movies/' + this.props.movieId + '/comments').then(response => response.json()).then(data => {
+    //   this.setState({comments: data});
+    // })
+    this.getComments();
+  }
+
+  getComments = () => {
     fetch(SERVER_URL + '/movies/' + this.props.movieId + '/comments').then(response => response.json()).then(data => {
       this.setState({comments: data});
     })
@@ -26,7 +33,7 @@ export class MovieComments extends React.Component {
   render() {
     return (
       <div>
-        <MovieCommentForm movieId={this.props.movieId}/>
+        <MovieCommentForm movieId={this.props.movieId} getComments={this.getComments}/>
 
         <div className="movie-comments">
           {this.state.comments.map(c => <MovieComment key={c.id} data={c} />)}
