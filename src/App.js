@@ -9,7 +9,8 @@ import { FilterBar } from './components/FilterBar';
 export class App extends Component {
   state = {
     movies,
-    filters
+    filters,
+    sidebarOpened: false
   };
 
   selectTab = (category) => {
@@ -19,10 +20,14 @@ export class App extends Component {
   };
 
   openSideBar = () => {
+    console.log('toggle side bar');
     // We need to toggle the state of the sidebar here to make sure it is in an open state
+    this.setState({sidebarOpened: !this.state.sidebarOpened})
   };
 
   render() {
+    console.log(this.state.sidebarOpened);
+    
     return (
 
       <div>
@@ -33,7 +38,7 @@ export class App extends Component {
           <FilterBar filters={this.state.filters} selectTab={this.selectTab}/>
 
           {/*If the sidebar is open you need to add the css class filter-is-visible to the div below*/}
-          <section className="gallery">
+          <section className={`gallery ${this.state.sidebarOpened ? 'filter-is-visible' : ''}`}>
             {this.state.movies.map(movie =>
               <Movie key={movie.id} data={movie} />
             )}
@@ -41,7 +46,7 @@ export class App extends Component {
 
           <div>
             {/*If the sidebar is open you need to add the css class filter-is-visible to the div below*/}
-            <div className="filter">
+            <div className={`filter ${this.state.sidebarOpened ? 'filter-is-visible' : ''}`}>
               <form onSubmit={e => e.preventDefault}>
                 <div className="filter-block">
                   <h4>Search</h4>
@@ -55,10 +60,7 @@ export class App extends Component {
 
             <a
               className="hand-cursor filter-trigger"
-              onClick={this.openSideBar}
-            >
-              Filters
-            </a>
+              onClick={this.openSideBar}>Filters</a>
           </div>
 
         </main>
