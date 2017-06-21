@@ -18,8 +18,8 @@ export class MovieComment extends React.Component {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-      }}).then(() => this.props.getComments());
-    //We also want to see the comment directly deleted, without refreshing the page
+      }}).then(() => this.props.getComments()); //We also want to see the comment directly deleted, without refreshing the page
+
   }
  
 

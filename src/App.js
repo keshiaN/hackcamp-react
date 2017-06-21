@@ -45,6 +45,8 @@ export class App extends Component {
     this.setState({
       cart: [...this.state.cart, movie]
     })
+
+    console.log('cart ', this.state.cart);
   }
 
   isInCart = (movie) => {

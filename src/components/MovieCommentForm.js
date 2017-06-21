@@ -35,7 +35,6 @@ export class MovieCommentForm extends React.Component {
         author: this.state.author,
         content: this.state.content,
       })}).then(() => this.props.getComments()); //Third: We also want to see our comment directly on the page, without refreshing the page
-      //Hint: We need to refetch all the comments in the parent when the post is done
   }
 
   render() {

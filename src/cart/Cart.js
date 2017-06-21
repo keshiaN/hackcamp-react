@@ -21,10 +21,10 @@ export class Cart extends Component {
       this.getProducts(nextProps.products);
     }
   }
-
+  
   getProducts = (ids = [285]) => {
-    const products = [];
     //We need to transform the array of ids into an array of movies here
+    const products = this.props.movies.filter(movie => ids.includes(movie.id));
     this.setState({products});
   };
 
