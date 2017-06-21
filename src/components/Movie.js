@@ -8,17 +8,29 @@ const shorten = (text, limit = 140) =>
 
 export class Movie extends Component {
   //We need to keep track on whether the Movie is hovered or not
+  state = {
+    isMovieHovered: false
+  }
+
+  enableMovieHovered = () => {
+    this.setState({isMovieHovered: true});
+  }
+
+  disableHover = () => {
+    this.setState({isMovieHovered: false});
+  }
+
   render() {
     const {data, selectMovie, addToCart, isInCart, removeFromCart} = this.props;
     return (
-      <div className="movie" onMouseEnter="" onMouseLeave="">
+      <div className="movie" onMouseEnter={this.enableMovieHovered} onMouseLeave={this.disableHover}>
         <img
           alt={`${data.title}'s cover`}
           src={PICTURES_CDN_URL + data.poster_path}
         />
         {/*You need to add or remove the show-movie-body in the className property
         if the movie is hovered/not hovered*/}
-        <div className={`movie-body`}>
+        <div className={`movie-body ${this.state.isMovieHovered ? 'show-movie-body' : ''}`}>
           <h1>{data.title}</h1>
           <p>{shorten(data.overview)}</p>
           {isInCart(data.id)

@@ -15,16 +15,21 @@ export class MovieComments extends React.Component {
     movieId: PropTypes.number.isRequired
   };
 
-  //Here we need to fetch the comments on a certain movie (the url is SERVER_URL/movies/MOVIEID/comments)
-  //The id of that movie is in the props
+  componentDidMount() {
+    //Here we need to fetch the comments on a certain movie (the url is SERVER_URL/movies/MOVIEID/comments)
+    //The id of that movie is in the props
+    fetch(SERVER_URL + '/movies/' + this.props.movieId + '/comments').then(response => response.json()).then(data => {
+      this.setState({comments: data});
+    })
+  }
 
   render() {
     return (
       <div>
-        <MovieCommentForm />
+        <MovieCommentForm movieId={this.props.movieId}/>
 
         <div className="movie-comments">
-          {this.state.comments.map(c => <MovieComment data={c} />)}
+          {this.state.comments.map(c => <MovieComment key={c.id} data={c} />)}
         </div>
 
       </div>

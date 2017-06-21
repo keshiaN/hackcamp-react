@@ -22,13 +22,11 @@ export class MovieList extends Component {
         propsHasChanged = true;
       }
     });
-    if(propsHasChanged || nextProps.selectedFilter !== this.props.selectedFilter) {
+    //Or if the filter changed
+    //Or if the search value changed
+    if(propsHasChanged || nextProps.selectedFilter !== this.props.selectedFilter || nextProps.searchValue !== this.props.searchValue) {
         this.filterMovies(nextProps);
     }
-
-    //Or if the filter changed
-    
-    //Or if the search value changed
   }
 
   filterMovies = ({searchValue, selectedFilter, movies}) => {
