@@ -18,7 +18,7 @@ cd hackcamp.react
 
 # Only the backend with docker
 yarn
-docker-compose backend
+docker-compose up backend -d
 yarn start
 
 # Using docker for everything
