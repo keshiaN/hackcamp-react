@@ -16,8 +16,14 @@ export class App extends Component {
 
   componentDidMount() {
     //We need to fetch the movies (at the url SERVER_URL/movies)
-    fetch(SERVER_URL + '/movies').then((response) => response.json()).then(data => console.log('data'));
+    fetch(SERVER_URL + '/movies').then((response) => response.json()).then(data => {
+      this.setState({
+        movies: data
+      })
+      console.log('data', data)
+    });
     //And then update the state with the movies
+    
   }
 
   selectMovie = movieId => {
@@ -27,6 +33,23 @@ export class App extends Component {
   //Cart handling
   //We need to have functions that will tell us if a movie is in the cart,
   //add a movie to the cart and remove a movie from the cart
+  removeFromCart = (movie) => {
+    this.setState({
+      cart: this.state.cart.filter(item => {
+        return item !== movie;
+      })
+    })
+  };
+
+  addToCart = (movie) => {
+    this.setState({
+      cart: [...this.state.cart, movie]
+    })
+  }
+
+  isInCart = (movie) => {
+    return this.state.cart.includes(movie);
+  }
 
   render() {
     const {selectedMovie, movies, cart} = this.state;
@@ -38,8 +61,8 @@ export class App extends Component {
               selectMovie={this.selectMovie}
               movieId={selectedMovie}
             />
-          : <Main movies={movies} selectMovie={this.selectMovie} />}
-        <Cart products={cart} movies={movies} />
+          : <Main movies={movies} selectMovie={this.selectMovie} removeFromCart={this.removeFromCart} addToCart={this.addToCart} isInCart={this.isInCart}/>}
+        <Cart products={cart} movies={movies} removeFromCart={this.removeFromCart}/>
       </div>
     );
   }

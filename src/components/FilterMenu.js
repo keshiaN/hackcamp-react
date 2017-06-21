@@ -9,7 +9,7 @@ export const FilterMenu = ({selectTab, filters, counter}) => {
         <FilterItems
           counter={counter}
           filters={filters}
-          selectTab={() => selectTab("ALL")}
+          selectTab={selectTab}
         />
       </div>
     </div>

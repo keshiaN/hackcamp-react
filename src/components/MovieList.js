@@ -14,7 +14,20 @@ export class MovieList extends Component {
 
   componentWillReceiveProps(nextProps) {
     //Here we want to filter the movies if the new movies that we got are not the same as the old ones
+    let oldProps = new Set(this.props.movies);
+    let newProps = new Set(nextProps.movies);
+    let propsHasChanged = false;
+    newProps.forEach(item => {
+      if(!oldProps.has(item)) {
+        propsHasChanged = true;
+      }
+    });
+    if(propsHasChanged || nextProps.selectedFilter !== this.props.selectedFilter) {
+        this.filterMovies(nextProps);
+    }
+
     //Or if the filter changed
+    
     //Or if the search value changed
   }
 
