@@ -11,7 +11,7 @@ export const CartBody = ({removeFromCart, closeCart, products}) =>
     </button>
     <ul className="cart-product-list">
       {products.map((product, index) =>
-        <li key={index}>
+        <li key={product.id}>
           <CartProduct removeFromCart={removeFromCart} {...product} />
         </li>
       )}
@@ -23,3 +23,5 @@ CartBody.propTypes = {
   products: PropTypes.arrayOf(movie).isRequired,
   closeCart: PropTypes.func.isRequired
 };
+
+// {...product} in JSX adding all properties of product like title, id, ... to cartproduct => title={product.title}, ...

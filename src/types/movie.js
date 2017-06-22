@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
-export const movie = PropTypes.shape({
+export const movieProps = {
+
   vote_count: PropTypes.number.isRequired,
   id: PropTypes.number.isRequired,
   video: PropTypes.bool.isRequired,
@@ -15,4 +16,7 @@ export const movie = PropTypes.shape({
   adult: PropTypes.bool.isRequired,
   overview: PropTypes.string.isRequired,
   release_date: PropTypes.string.isRequired
-});
+
+}
+
+export const movie = PropTypes.shape(movieProps);
