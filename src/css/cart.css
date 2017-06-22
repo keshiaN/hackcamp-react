@@ -1,0 +1,95 @@
+.cart-wrapper {
+  background-color: tomato;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  width: 50px;
+  height: 50px;
+  transition: .5s all ease;
+  cursor: pointer;
+}
+.cart-wrapper .cart-body .cart-product-list{
+  opacity: 0;
+  transition: 1s opacity ease;
+}
+.cart-wrapper.cart-open .cart-body .cart-product-list{
+  opacity: 1;
+}
+.cart-wrapper.cart-open{
+  cursor: auto;
+}
+.cart-wrapper button{
+  cursor: pointer;
+}
+
+.thumb-cart {
+  height: 50px;
+}
+
+.cart-product {
+  display: flex;
+  flex-direction: row;
+}
+
+.cart-product-title {
+  font-size: 0.7em;
+}
+
+.cart-product-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart-product-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-open {
+  overflow: auto;
+  width: 300px;
+  height: 200px;
+  font-size: 1em;
+  display: block;
+}
+
+.cart-body {
+  position: relative;
+  padding: 35px 7px 14px;
+}
+
+.btn-close {
+  position: absolute;
+  top: 5px;
+}
+.btn-info{
+  right: 60px;
+}
+.btn-danger{
+  right: 7px;
+}
+.cart-product-list {
+  padding-top: 5px;
+}
+.cart-product-list li{
+  margin-bottom: 10px;
+}
+.cart-product{
+  position: relative;
+}
+.cart-product > div{
+  padding-right: 60px;
+}
+.cart-product > div button{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+
+}
+.cart-product > img{
+  margin-right: 7px;
+}
