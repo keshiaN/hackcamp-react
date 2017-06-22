@@ -13,10 +13,14 @@ class _MovieCommentForm extends React.Component {
 
   postComment = e => {
     e.preventDefault();
-    axios
-      .post(`${SERVER_URL}/movies/${this.props.movieId}/comments/`, {
+    axios.post(`${SERVER_URL}/movies/${this.props.movieId}/comments/`, 
+      {
         author: this.state.author,
         content: this.state.content
+      }, {
+        headers: {
+          Authorization: this.props.token
+        }
       })
       .then(this.setState({author: '', content: ''}))
       .then(this.props.updateComments);
@@ -42,8 +46,7 @@ class _MovieCommentForm extends React.Component {
             type="text"
             placeholder="Author"
             value={this.state.author}
-            onChange={this.updateAuthor}
-          />
+            onChange={this.updateAuthor}/>
         </div>
 
         <div className="form-group">
@@ -54,8 +57,7 @@ class _MovieCommentForm extends React.Component {
             cols="30"
             rows="3"
             value={this.state.content}
-            onChange={this.updateContentText}
-          />
+            onChange={this.updateContentText}/>
         </div>
 
         <button className="btn btn-primary">
@@ -72,4 +74,8 @@ _MovieCommentForm.propTypes = {
   token: PropTypes.string
 };
 
-export const MovieCommentForm = connect()(_MovieCommentForm);
+const mapStateToProps = state => ({
+  token: state.auth.token
+});
+
+export const MovieCommentForm = connect(mapStateToProps)(_MovieCommentForm);
