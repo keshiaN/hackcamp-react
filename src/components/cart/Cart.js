@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import '../../css/cart.css';
 import {movie} from '../../types/movie';
 import {CartBody} from './CartBody';
+import {CartCount} from './CartCount';
 import {toggleCart} from '../../actions/cartActions';
 import {connect} from 'react-redux';
 
@@ -14,7 +15,10 @@ const _Cart = props => {
      * You need to add the 'cart-open' class in order to open your cart 
      * If the cart is open, return <CartBody /> otherwise return <CartCount />
      **/
-    <div className="cart-wrapper" />
+    <div className="cart-wrapper">
+      {isOpen ? <CartBody /> 
+      : <CartCount/>}
+    </div>
   );
 };
 
@@ -43,14 +47,28 @@ _Cart.defaultProps = {
  * @param state: State tree of your redux store
  * @param ownProps: Props received from the parent
  */
-const mapStateToProps = (state, ownProps = {}) => ({});
+const mapStateToProps = (state, ownProps = {}) => {
+  // let productArray = ownProps.movies.filter(movie => {
+  //   state.cart.products.includes(movie.id)
+  // });
+
+  return {
+    count: state.cart.count,
+    isOpen: state.cart.isOpen,
+    products: state.cart.products
+  };
+};
 
 /*
  * You should give "toggleCart"
  * as a prop to your component
  * using mapDispatchToProps
  */
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => {
+  return {
+    toggleCart: cartId => dispatch(toggleCart(cartId))
+  }
+};
 
 export const Cart = connect(mapStateToProps, mapDispatchToProps)(_Cart);
 

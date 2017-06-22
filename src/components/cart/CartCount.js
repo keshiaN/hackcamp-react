@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Actions} from './../../constants/actions'
 
 const _CartCount = ({count, toggleCart}) =>
   <span onClick={toggleCart}>{count}</span>;
@@ -13,16 +12,10 @@ _CartCount.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    cart: state.carts
+    count: state.cart.count
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-  
-  };
-};
-
-export const CartCount = connect(mapStateToProps, mapDispatchToProps)(
+export const CartCount = connect(mapStateToProps)(
   _CartCount
 );

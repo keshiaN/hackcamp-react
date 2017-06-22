@@ -4,7 +4,7 @@ import {Movie} from './Movie';
 import {getGenreId, movieContainsGenre} from '../libs/utils';
 import {connect} from 'react-redux';
 
-export class MovieList extends Component {
+export class _MovieList extends Component {
   state = {
     filteredList: []
   };
@@ -54,7 +54,7 @@ export class MovieList extends Component {
   }
 }
 
-MovieList.propTypes = {
+_MovieList.propTypes = {
   updateCounter: PropTypes.func.isRequired,
   movies: PropTypes.array.isRequired,
   navClosed: PropTypes.bool.isRequired,
@@ -66,3 +66,14 @@ MovieList.propTypes = {
 /**
  * You should give your component the state of the search reducer
  **/
+
+const mapStateToProps = state => {
+  return {
+    searchValue: state.search.searchValue,
+    selectedFilter: state.search.selectedFilter
+  };
+};
+
+export const MovieList = connect(mapStateToProps)(
+  _MovieList
+);
