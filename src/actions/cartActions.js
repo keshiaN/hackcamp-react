@@ -12,3 +12,26 @@ export const removeFromCart = payload => ({
   type: REMOVE_ITEM_FROM_CART,
   payload
 });
+
+/**
+ *  @param payload: the item you wish to add to your cart
+*/
+export const addToCart = payload => ({
+  type: REMOVE_ITEM_FROM_CART,
+  payload
+});
+
+/**
+ * @param payload: id of the item you wish to toggle
+ */
+export const toggleCart = payload => ({
+  type: REMOVE_ITEM_FROM_CART,
+  payload
+});
+
+/**
+ * @param payload: undo last acton
+ */
+export const undoCartAction = () => ({
+  type: REMOVE_ITEM_FROM_CART
+});
