@@ -1,0 +1,25 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  background: #16161d;
+  background: linear-gradient(#434343, #16161d);
+}
+
+header img {
+  display: block;
+  height: 6rem;
+}
+
+header h1 {
+  color: tomato;
+  font-size: 6rem;
+  margin: 0 .5rem;
+}
+
+@media only screen and (min-width: 1170px) {
+  header {
+    height: 250px;
+  }
+}
