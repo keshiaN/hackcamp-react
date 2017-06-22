@@ -24,9 +24,8 @@ export const addToCart = payload => ({
 /**
  * @param payload: id of the item you wish to toggle
  */
-export const toggleCart = payload => ({
-  type: TOGGLE_CART,
-  payload
+export const toggleCart = () => ({
+  type: TOGGLE_CART
 });
 
 /**

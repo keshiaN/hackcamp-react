@@ -15,9 +15,9 @@ const _Cart = props => {
      * You need to add the 'cart-open' class in order to open your cart 
      * If the cart is open, return <CartBody /> otherwise return <CartCount />
      **/
-    <div className="cart-wrapper">
-      {isOpen ? <CartBody /> 
-      : <CartCount/>}
+    <div className={`${isOpen ? 'cart-open cart-wrapper' : 'cart-wrapper'}`}>
+      {isOpen ? <CartBody products={products}/> 
+      : <CartCount toggleCart={toggleCart}/>}
     </div>
   );
 };
@@ -47,15 +47,18 @@ _Cart.defaultProps = {
  * @param state: State tree of your redux store
  * @param ownProps: Props received from the parent
  */
-const mapStateToProps = (state, ownProps = {}) => {
-  // let productArray = ownProps.movies.filter(movie => {
-  //   state.cart.products.includes(movie.id)
-  // });
+const mapStateToProps = (state, ownProps) => {
+  let productArray = ownProps.movies ? 
+    ownProps.movies.filter(movie => {
+      return state.cart.products.includes(movie.id)
+    }) 
+    : 
+    [];
 
   return {
     count: state.cart.count,
     isOpen: state.cart.isOpen,
-    products: state.cart.products
+    products: productArray
   };
 };
 
@@ -66,7 +69,7 @@ const mapStateToProps = (state, ownProps = {}) => {
  */
 const mapDispatchToProps = dispatch => {
   return {
-    toggleCart: cartId => dispatch(toggleCart(cartId))
+    toggleCart: () => dispatch(toggleCart())
   }
 };
 
