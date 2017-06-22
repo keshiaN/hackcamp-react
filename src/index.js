@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/style.css';
 import {App} from './App';
 import registerServiceWorker from './registerServiceWorker';
+import {Provider} from 'react-redux';
+import {store} from './store/store';
 
 /**
  * Provider is an higher order component.
@@ -15,7 +17,9 @@ import registerServiceWorker from './registerServiceWorker';
 const Index = () => <App />;
 
 ReactDOM.render(
-  <h1>Looks like theres something wrong with your index.js...</h1>,
+  <Provider store={store}>
+    <App/>
+  </Provider>,
   document.getElementById('root')
 );
 registerServiceWorker();

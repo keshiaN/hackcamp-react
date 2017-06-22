@@ -3,7 +3,7 @@ import {LOGIN, LOGOUT} from '../constants/actions';
 /**
  * @param payload: auth token
  */
-export const login = () => ({
+export const login = (payload) => ({
   type: LOGIN,
   payload
 });
@@ -11,7 +11,7 @@ export const login = () => ({
 /**
  * This one takes no parameter
  */
-export const logout = () => ({
+export const logout = (payload) => ({
   type: LOGOUT,
   payload
 });

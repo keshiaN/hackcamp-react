@@ -13,4 +13,4 @@ In order to use the devtools, please follow this guide.
  https://github.com/zalmoxisus/redux-devtools-extension
  */
 
-export const store = undefined;
+export const store = createStore(rootReducer);
