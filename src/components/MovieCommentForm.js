@@ -5,7 +5,7 @@ import axios from 'axios';
 import {SERVER_URL} from '../constants/config';
 import {connect} from 'react-redux';
 import {reduxForm, Field } from 'redux-form';
-import {addComment} from '../actions/commentsActions';
+import {addComment, deleteComment} from '../actions/commentsActions';
 
 //REDUX FORM
 //You'll have to implement this function, it has to validate the data for the redux form
@@ -59,6 +59,8 @@ const textareaRenderField = ({
 class _MovieCommentForm extends React.Component {
 
   postComment = data => {
+    // TODO: implement all actions for the update and add with slow server
+    this.props.updateComments({movie_id: this.props.movieId, author: data.author, content: data.content, id: Math.random()})
     axios
       .post(
         `${SERVER_URL}/movies/${this.props.movieId}/comments/`,
@@ -70,7 +72,8 @@ class _MovieCommentForm extends React.Component {
           headers: {Authorization: this.props.token}
         }
       )
-      .then((response) => this.props.updateComments(response.data));
+      .then((response) => this.props.updateComments(response.data))
+      .catch((response) => this.props.deleteComment(1001))
   };
 
   updateContentText = e => {
@@ -126,7 +129,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToState = (dispatch, props) => ({
   //Get the function to dispatch the add action to redux
-  updateComments: comment => dispatch(addComment(comment))
+  updateComments: comment => dispatch(addComment(comment)),
+  deleteComment: commentId => dispatch(deleteComment({movie_id: props.movieId, id: commentId}))
 });
 
 export const ConnectedMovieCommentForm = connect(mapStateToProps, mapDispatchToState)(

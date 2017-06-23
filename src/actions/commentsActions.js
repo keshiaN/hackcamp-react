@@ -15,4 +15,9 @@ export const addComment = payload => ({
   payload
 });
 
+export const addCommentStart = payload => ({
+  type: ADD_COMMENT_START,
+  payload
+})
+
 
