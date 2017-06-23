@@ -4,7 +4,7 @@ import '../css/MovieComment.css';
 import {SERVER_URL} from '../constants/config';
 import axios from 'axios';
 import {connect} from 'react-redux';
-import '../actions/commentsActions';
+import {deleteComment} from '../actions/commentsActions';
 
 class _MovieComment extends React.Component {
   static propTypes = {
@@ -20,7 +20,7 @@ class _MovieComment extends React.Component {
     e.preventDefault();
     axios.delete(`${SERVER_URL}/comments/${this.props.data.id}`, {
       headers: {Authorization: this.props.token}
-    });
+    }).then(this.props.dispatchDelete());
   };
 
   render() {
@@ -46,6 +46,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToState = dispatch => ({
   //Dispatch an action to delete a comment
+  dispatchDelete: commentId => dispatch(deleteComment(commentId))
 });
 
 export const MovieComment = connect(mapStateToProps, mapDispatchToState)(

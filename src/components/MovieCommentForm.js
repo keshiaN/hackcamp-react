@@ -4,6 +4,7 @@ import '../css/MovieCommentForm.css';
 import axios from 'axios';
 import {SERVER_URL} from '../constants/config';
 import {connect} from 'react-redux';
+import {addComment} from '../actions/commentsActions';
 
 //REDUX FORM
 //You'll have to implement this function, it has to validate the data for the redux form
@@ -17,6 +18,7 @@ class _MovieCommentForm extends React.Component {
 
   postComment = e => {
     e.preventDefault();
+    //this.props.updateComments({movie_id: this.props.movieId, author: this.state.author, content: this.state.content});
     axios
       .post(
         `${SERVER_URL}/movies/${this.props.movieId}/comments/`,
@@ -28,7 +30,7 @@ class _MovieCommentForm extends React.Component {
           headers: {Authorization: this.props.token}
         }
       )
-      .catch(this.props.updateComments);
+      .then((response) => this.props.updateComments(response.data));
   };
 
   updateContentText = e => {
@@ -85,8 +87,9 @@ const mapStateToProps = state => ({
   token: state.auth.token
 });
 
-const mapDispatchToState = dispatch => ({
+const mapDispatchToState = (dispatch, props) => ({
   //Get the function to dispatch the add action to redux
+  updateComments: comment => dispatch(addComment(comment))
 });
 
 export const MovieCommentForm = connect(mapStateToProps, mapDispatchToState)(

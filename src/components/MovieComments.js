@@ -25,7 +25,6 @@ class _MovieComments extends React.Component {
       .get(`${SERVER_URL}/movies/${this.props.movieId}/comments`)
       .then(response => {
         //Store the comments in redux
-        console.log('comments from http ', response);
         this.props.dispatchGet(response.data);
       });
   };
