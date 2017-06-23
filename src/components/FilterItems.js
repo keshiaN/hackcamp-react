@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 import {SERVER_URL} from '../constants/config';
 import {login, logout} from '../actions/authActions';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 const performLogin = dispatchToken => {
   axios.post(`${SERVER_URL}/login`, {password: 'h4Xflix'}).then(response => {
@@ -48,9 +48,9 @@ const _FilterItems = ({
            * This navlink should add the className "selected"
            * if your link is supposed to be active (category selected)
            */}
-          <Link to="/">
+          <NavLink to="/" activeClassName="selected" isActive={() => selected}>
             {category}
-          </Link>
+          </NavLink>
         </li>
       )}
       <Counter value={counter} />

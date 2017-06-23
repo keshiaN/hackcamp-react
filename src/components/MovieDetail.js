@@ -19,7 +19,6 @@ class _MovieDetail extends Component {
   }
 
   componentDidMount = () => {
-    console.log('movie id', this.props.match.params.id)
     this.fetchMovieDetails(this.props.match.params.id)
   }
 
@@ -31,8 +30,12 @@ class _MovieDetail extends Component {
       return <h1>Loading ...</h1>;
     }
     const {title, backdrop_path, overview, release_date, vote_average} = movie;
+    console.log('movie ', movie);
     return (
       <div>
+        <Route path={`${match.path}/comments`} render={() => {
+          return <MovieComments movieId={movie.id.toString()}/>
+        }}/>
         <div className="card mb-3 movie-card">
           <img
             alt="Movie Cover"
@@ -50,7 +53,7 @@ class _MovieDetail extends Component {
             </button>
             {loggedIn &&
               <span className="btn btn-info">
-                See the comments
+                <Link to={`${match.url}/comments`}>See the comments</Link>
               </span>}
           </div>
           <div className="card-footer">
