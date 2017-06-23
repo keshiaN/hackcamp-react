@@ -18,7 +18,7 @@ const validate = data => {
   }
   if(!data.content){
     errors.content = 'Content is required'
-  } else if(data.author.length > 150) {
+  } else if(data.content.length > 150) {
     errors.content = "The content can't contain more then 150 characters"
   }
   console.log(errors);
@@ -43,35 +43,28 @@ const inputRenderField = ({
 )
 
 const textareaRenderField = ({
-  textarea,
+  input,
   placeholder,
-  meta: { touched, error, warning }
+  meta: { touched, error }
 }) => (
   <div>
     <label>{placeholder}</label>
     <div>
-      <textarea {...textarea} placeholder={placeholder}/>
-      {touched &&
-        ((error && <span>{error}</span>) ||
-          (warning && <span>{warning}</span>))}
+      <textarea {...input} placeholder={placeholder}/>
+      {touched && error && <span>{error}</span>}
     </div>
   </div>
 )
 
 class _MovieCommentForm extends React.Component {
-  state = {
-    author: '',
-    content: ''
-  };
 
-  postComment = e => {
-    e.preventDefault();
+  postComment = data => {
     axios
       .post(
         `${SERVER_URL}/movies/${this.props.movieId}/comments/`,
         {
-          author: this.state.author,
-          content: this.state.content
+          author: data.author,
+          content: data.content
         },
         {
           headers: {Authorization: this.props.token}
@@ -99,8 +92,6 @@ class _MovieCommentForm extends React.Component {
             type="text"
             placeholder="Author"
             component={inputRenderField}
-            value={this.state.author}
-            onChange={this.updateAuthor}
           />
         </div>
 
@@ -112,8 +103,6 @@ class _MovieCommentForm extends React.Component {
             rows="3"
             placeholder="Content"
             component={textareaRenderField}
-            value={this.state.content}
-            onChange={this.updateContentText}
           />
         </div>
 
