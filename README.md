@@ -12,6 +12,8 @@ We now use React Router 4 in the app to navigate, create the following routes:
 - `/stats` <-- *Stats*
 
 [doc on routes](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md)
+
+
 [doc on links](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md)
 
 #### NavLinks
