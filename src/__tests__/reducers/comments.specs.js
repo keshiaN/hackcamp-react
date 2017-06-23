@@ -1,5 +1,5 @@
 import {comments, initialState} from '../../reducers/commentByMovie';
-import {DELETE_COMMENT, GET_COMMENTS} from '../../constants/actions';
+import {DELETE_COMMENT, GET_COMMENTS, ADD_COMMENT} from '../../constants/actions';
 
 describe('Comments Reducer', () => {
   it('should be a function', () => {
@@ -28,6 +28,48 @@ describe('Comments Reducer', () => {
     done();
   });
 
+  it('should be able to add a comment for a movie', done => {
+    const initialState = {
+      285: [
+        {
+          movie_id: 285,
+          author: 'John',
+          content: 'Not a good movie',
+          id: 1
+        }
+      ]
+    };
+
+    const actionAdd = {
+      type: ADD_COMMENT,
+      payload: {
+        id: 2,
+        author: 'Sam',
+        content: 'een biejst',
+        movie_id: 285
+      }
+    };
+
+    const expected = {
+      285: [
+        {
+          movie_id: 285,
+          author: 'John',
+          content: 'Not a good movie',
+          id: 1
+        }, {
+          author: 'Sam',
+          content: 'een biejst',
+          id: 2,
+          movie_id: 285
+        }
+      ]
+    };
+
+    expect(comments(initialState, actionAdd)).toEqual(expected);
+    done();
+  });
+
   it('should be able to read all the comments for a movie', done => {
     const action = {
       type: GET_COMMENTS,
@@ -40,8 +82,7 @@ describe('Comments Reducer', () => {
             content: 'Great movie',
             oldId: 123456789,
             id: 1
-          },
-          {
+          }, {
             movie_id: 285,
             author: 'John',
             content: 'Good movie',
@@ -60,8 +101,7 @@ describe('Comments Reducer', () => {
           content: 'Great movie',
           oldId: 123456789,
           id: 1
-        },
-        {
+        }, {
           movie_id: 285,
           author: 'John',
           content: 'Good movie',

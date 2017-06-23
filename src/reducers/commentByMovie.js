@@ -22,7 +22,8 @@ export const comments = (state = initialState, action) => {
 
     case ADD_COMMENT:
       return {
-        ...state
+        ...state,
+        [action.payload.movie_id]: state[action.payload.movie_id].concat(action.payload)
       }
 
     default:
