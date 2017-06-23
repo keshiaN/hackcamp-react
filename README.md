@@ -7,9 +7,9 @@ In order for the routing to work your App should be wrapped in a special compone
 
 #### Routing
 We now use React Router 4 in the app to navigate, create the following routes:
-- `/` <-- __<Main />__
-- `/movies/:id` <-- __<MovieDetail />__
-- `/stats` <-- __<Stats />__
+- `/` <-- *Main*
+- `/movies/:id` <-- *MovieDetail*
+- `/stats` <-- *Stats*
 
 [doc on routes](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/Route.md)
 [doc on links](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/api/Link.md)
