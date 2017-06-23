@@ -5,6 +5,8 @@ export const initialState = {
 
 export const comments = (state = initialState, action) => {
 
+  console.log('action', action);
+
   switch (action.type) {
     case DELETE_COMMENT:
       return {

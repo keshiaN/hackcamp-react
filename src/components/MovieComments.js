@@ -5,6 +5,7 @@ import {SERVER_URL} from '../constants/config';
 import axios from 'axios';
 import {MovieComment} from './MovieComment';
 import '../css/MovieComments.css';
+import {getComments} from '../actions/commentsActions';
 import {connect} from 'react-redux';
 
 class _MovieComments extends React.Component {
@@ -24,6 +25,8 @@ class _MovieComments extends React.Component {
       .get(`${SERVER_URL}/movies/${this.props.movieId}/comments`)
       .then(response => {
         //Store the comments in redux
+        console.log('comments from http ', response);
+        this.props.dispatchGet(response.data);
       });
   };
 
@@ -61,15 +64,20 @@ class _MovieComments extends React.Component {
   }
 }
 
-const mapStateToProps = (state, props) => ({
-  loggedIn: state.auth.loggedIn
+const mapStateToProps = (state, props) => {
+
+console.log(state.comments)
+
+  return {loggedIn: state.auth.loggedIn,
   //Get the comments from the state
-});
+  comments: state.comments[props.movieId]}
+};
 
-const mapDispatchToState = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   //Get the action to dipatch the comments in the state
+  dispatchGet: comments => dispatch(getComments({movie_id: props.movieId, comments}))
 });
 
-export const MovieComments = connect(mapStateToProps, mapDispatchToState)(
+export const MovieComments = connect(mapStateToProps, mapDispatchToProps)(
   _MovieComments
 );
