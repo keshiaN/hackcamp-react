@@ -4,11 +4,59 @@ import '../css/MovieCommentForm.css';
 import axios from 'axios';
 import {SERVER_URL} from '../constants/config';
 import {connect} from 'react-redux';
+import {reduxForm, Field } from 'redux-form';
 import {addComment} from '../actions/commentsActions';
 
 //REDUX FORM
 //You'll have to implement this function, it has to validate the data for the redux form
-const validate = data => {};
+const validate = data => {
+  const errors = {}
+  if(!data.author){
+    errors.author = 'Author is required'
+  } else if(data.author.charAt(0).toUpperCase() !== data.author.charAt(0)) {
+    errors.author = 'Author must start with an uppercase letter'
+  }
+  if(!data.content){
+    errors.content = 'Content is required'
+  } else if(data.author.length > 150) {
+    errors.content = "The content can't contain more then 150 characters"
+  }
+  console.log(errors);
+  return errors;
+};
+
+const inputRenderField = ({
+  input,
+  placeholder,
+  type,
+  meta: { touched, error, warning }
+}) => (
+  <div>
+    <label>{placeholder}</label>
+    <div>
+      <input {...input} placeholder={placeholder} type={type} />
+      {touched &&
+        ((error && <span>{error}</span>) ||
+          (warning && <span>{warning}</span>))}
+    </div>
+  </div>
+)
+
+const textareaRenderField = ({
+  textarea,
+  placeholder,
+  meta: { touched, error, warning }
+}) => (
+  <div>
+    <label>{placeholder}</label>
+    <div>
+      <textarea {...textarea} placeholder={placeholder}/>
+      {touched &&
+        ((error && <span>{error}</span>) ||
+          (warning && <span>{warning}</span>))}
+    </div>
+  </div>
+)
 
 class _MovieCommentForm extends React.Component {
   state = {
@@ -18,7 +66,6 @@ class _MovieCommentForm extends React.Component {
 
   postComment = e => {
     e.preventDefault();
-    //this.props.updateComments({movie_id: this.props.movieId, author: this.state.author, content: this.state.content});
     axios
       .post(
         `${SERVER_URL}/movies/${this.props.movieId}/comments/`,
@@ -43,33 +90,34 @@ class _MovieCommentForm extends React.Component {
 
   render() {
     return (
-      <form className="comment-form" onSubmit={this.postComment}>
+      <form className="comment-form" onSubmit={this.props.handleSubmit(this.postComment)}>
 
         <div className="form-group">
-          <input
+          <Field
             className="form-control"
             name="author"
-            id="author"
             type="text"
             placeholder="Author"
+            component={inputRenderField}
             value={this.state.author}
             onChange={this.updateAuthor}
           />
         </div>
 
         <div className="form-group">
-          <textarea
+          <Field
             className="form-control"
             name="content"
-            id="content"
             cols="30"
             rows="3"
+            placeholder="Content"
+            component={textareaRenderField}
             value={this.state.content}
             onChange={this.updateContentText}
           />
         </div>
 
-        <button className="btn btn-primary">
+        <button className="btn btn-primary" type="submit">
           Add
         </button>
       </form>
@@ -92,11 +140,12 @@ const mapDispatchToState = (dispatch, props) => ({
   updateComments: comment => dispatch(addComment(comment))
 });
 
-export const MovieCommentForm = connect(mapStateToProps, mapDispatchToState)(
+export const ConnectedMovieCommentForm = connect(mapStateToProps, mapDispatchToState)(
   _MovieCommentForm
 );
 
 //TODO Uncomment the code below when you are ready to integrate redux forms
-/*export const MovieCommentForm = reduxForm({form: 'comments', validate})(
- ConnectedMovieCommentForm
- );*/
+export const MovieCommentForm = reduxForm({
+  form: 'comments', 
+  validate
+})(ConnectedMovieCommentForm);
