@@ -20,7 +20,7 @@ class _MovieComment extends React.Component {
     e.preventDefault();
     axios.delete(`${SERVER_URL}/comments/${this.props.data.id}`, {
       headers: {Authorization: this.props.token}
-    }).then(this.props.dispatchDelete());
+    }).then(() => this.props.dispatchDelete(this.props.data.id));
   };
 
   render() {
@@ -44,9 +44,9 @@ const mapStateToProps = state => ({
   token: state.auth.token
 });
 
-const mapDispatchToState = dispatch => ({
+const mapDispatchToState = (dispatch, props) => ({
   //Dispatch an action to delete a comment
-  dispatchDelete: commentId => dispatch(deleteComment(commentId))
+  dispatchDelete: commentId => dispatch(deleteComment({movie_id: props.movieId, id: commentId}))
 });
 
 export const MovieComment = connect(mapStateToProps, mapDispatchToState)(

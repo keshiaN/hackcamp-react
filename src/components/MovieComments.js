@@ -64,9 +64,6 @@ class _MovieComments extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-
-console.log(state.comments)
-
   return {loggedIn: state.auth.loggedIn,
   //Get the comments from the state
   comments: state.comments[props.movieId]}
