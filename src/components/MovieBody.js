@@ -32,7 +32,7 @@ export const _MovieBody = ({
           Add to cart
         </button>}
     <span className="btn btn-link">
-      See the details
+      <Link to={`/movies/${data.id}`}>See the details</Link>
     </span>
   </div>;
 

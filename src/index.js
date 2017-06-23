@@ -6,6 +6,8 @@ import {App} from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
 import {store} from './store/store';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
 
 const WrongIndex = () =>
   <div>
@@ -14,8 +16,10 @@ const WrongIndex = () =>
 
 const Index = () =>
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>;
 
-ReactDOM.render(<WrongIndex />, document.getElementById('root'));
+ReactDOM.render(<Index />, document.getElementById('root'));
 registerServiceWorker();

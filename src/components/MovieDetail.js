@@ -18,6 +18,11 @@ class _MovieDetail extends Component {
     this.setState({movie});
   }
 
+  componentDidMount = () => {
+    console.log('movie id', this.props.match.params.id)
+    this.fetchMovieDetails(this.props.match.params.id)
+  }
+
   render() {
     const {movie} = this.state;
     const {match, loggedIn} = this.props;
