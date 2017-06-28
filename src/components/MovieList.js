@@ -4,6 +4,8 @@ import {Movie} from './Movie';
 import {getGenreId, movieContainsGenre} from '../libs/utils';
 import {connect} from 'react-redux';
 import {setCounter} from '../actions/counterActions';
+import {selectPage} from '../actions/navActions';
+import {withRouter} from 'react-router-dom';
 
 class _MovieList extends Component {
   state = {
@@ -12,6 +14,13 @@ class _MovieList extends Component {
 
   componentDidMount() {
     this.filterMovies(this.props);
+    console.log('location', this.props);
+    const search = this.props.location.search;
+    const genre = new URLSearchParams(search).get('genre');
+
+    if (genre) {
+      this.props.selectPage(genre);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,9 +77,11 @@ const mapStateToProps = ({search, ui, movies}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateCounter: v => dispatch(setCounter(v))
+  updateCounter: v => dispatch(setCounter(v)),
+  selectPage: genre => dispatch(selectPage(genre))
 });
 
 export const MovieList = connect(mapStateToProps, mapDispatchToProps)(
-  _MovieList
+  withRouter(_MovieList)
 );
+

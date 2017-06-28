@@ -48,9 +48,12 @@ const _FilterItems = ({
            * This navlink should add the className "selected"
            * if your link is supposed to be active (category selected)
            */}
-          <NavLink to="/" activeClassName="selected" isActive={() => selected}>
+          <NavLink to={`/?genre=${category}`} activeClassName="selected" isActive={() => selected}>
             {category}
           </NavLink>
+          /**
+           * use history and push search params to it for sidebar filter
+           */
         </li>
       )}
       <Counter value={counter} />
