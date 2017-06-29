@@ -58,6 +58,12 @@ export class Main extends React.Component {
         this.setState({sideBarOpened: false})
     }
 
+    search = (event) => {
+        // search movies based on the search value from the sidebar
+        this.setState({searchValue: event.target.value})
+        this.filterMovies()
+    }
+
     render() {
         return (
             <main className="main-content">
@@ -74,7 +80,8 @@ export class Main extends React.Component {
                 <SideBar
                     openSideBar={this.openSideBar}
                     closeSideBar={this.closeSideBar}
-                    sideBarOpened={this.state.sideBarOpened}/>
+                    sideBarOpened={this.state.sideBarOpened}
+                    search={this.search}/>
 
             </main>
         )

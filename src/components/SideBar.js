@@ -6,19 +6,19 @@ export class SideBar extends React.Component {
     static propTypes = {
         sideBarOpened: PropTypes.bool,
         openSideBar: PropTypes.func.isRequired,
-        closeSideBar: PropTypes.func.isRequired
+        closeSideBar: PropTypes.func.isRequired,
+        search: PropTypes.func.isRequired
     }
 
     render() {
         return (
             <div>
-            {/*If the sidebar is open you need to add the css class filter-is-visible to the div below*/}
             <div className={`filter ${this.props.sideBarOpened ? 'filter-is-visible' : ''}`}>
               <form onSubmit={e => e.preventDefault}>
                 <div className="filter-block">
                   <h4>Search</h4>
                   <div className="filter-content">
-                    <input type="search" placeholder="title" />
+                    <input type="search" placeholder="title" onChange={this.props.search}/>
                   </div>
                 </div>
               </form>
