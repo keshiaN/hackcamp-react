@@ -1,73 +1,17 @@
 import React, { Component } from 'react';
-import movies from './mocks/movies.json';
-import filters from './mocks/filters';
-import genres from './mocks/genres';
 import './css/Header.css';
-import { Movie } from './components/Movie';
 import { Header } from './components/Header';
-import { FilterBar } from './components/FilterBar';
-import { SideBar } from './components/SideBar';
+import { Main } from './components/Main';
 
 export class App extends Component {
-  state = {
-    movies,
-    filters,
-    sideBarOpened: false
-  };
-
-  selectTab = (category) => {
-    // We need to update the `selected` property of the clicked category to be true.
-    this.setState({
-      filters: this.state.filters.map(filter => {
-        if (filter.category === category) {
-          filter.selected = true;
-        } else {
-          filter.selected = false;
-        }
-        return filter;
-      })
-    });
-
-    // We should also filter the movies which are passed to the movie list
-    // ...movie => will create a new movie object and only replace the properties which you define afterwards
-    this.setState({
-      movies: this.state.movies.map(movie => ({
-          ...movie,
-          selected: category === 'All' ? true : movie.genre_ids.includes(genres[0].id)
-      }))
-    });
-  }
-
-  openSideBar = () => {
-    // We need to toggle the state of the sidebar here to make sure it is in an open state
-    this.setState({sideBarOpened: true})
-  };
-
-  closeSideBar = () => {
-    this.setState({sideBarOpened: false})
-  }
 
   render() {    
     return (
 
       <div>
         <Header/>
-
-        <main className="main-content">
-
-          <FilterBar filters={this.state.filters} selectTab={this.selectTab}/>
-
-          {/*If the sidebar is open you need to add the css class filter-is-visible to the div below*/}
-          <section className={`gallery ${this.state.sideBarOpened ? 'filter-is-visible' : ''}`}>
-            {this.state.movies.map(movie =>
-              <Movie key={movie.id} data={movie} />
-            )}
-          </section>
-
-          <SideBar openSideBar={this.openSideBar} closeSideBar={this.closeSideBar} sideBarOpened={this.state.sideBarOpened}/>
-
-        </main>
-        </div> 
+        <Main/>
+      </div> 
 
     );
   }
