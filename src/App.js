@@ -15,15 +15,12 @@ export class App extends Component {
   };
 
   componentDidMount() {
-    //We need to fetch the movies (at the url SERVER_URL/movies)
+    // We need to fetch the movies (at the url SERVER_URL/movies) and update the state
     fetch(SERVER_URL + '/movies').then((response) => response.json()).then(data => {
       this.setState({
         movies: data
       })
-      console.log('data', data)
-    });
-    //And then update the state with the movies
-    
+    });    
   }
 
   selectMovie = movieId => {

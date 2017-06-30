@@ -9,11 +9,9 @@
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
-    "prettier": "^1.4.4",
     "react-scripts": "1.0.7"
   },
   "scripts": {
-    "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
