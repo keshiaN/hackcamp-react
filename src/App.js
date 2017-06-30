@@ -5,13 +5,15 @@ import {Header} from './components/Header';
 import {Main} from './components/Main';
 import {MovieDetail} from './components/MovieDetail';
 import {Cart} from './cart/Cart';
+import {Statistics} from './components/Statistics';
 import {SERVER_URL} from './constants/config';
 
 export class App extends Component {
   state = {
     selectedMovie: null,
     movies: [],
-    cart: []
+    cart: [],
+    selectedPage: null
   };
 
   componentDidMount() {
@@ -48,17 +50,26 @@ export class App extends Component {
     return this.state.cart.includes(movie);
   }
 
+  selectPage = (page) => {
+    this.setState({selectedPage: page})
+  }
+
   render() {
     const {selectedMovie, movies, cart} = this.state;
     return (
       <div>
         <Header />
-        {selectedMovie
+        {this.state.selectedPage === 'stats' 
+          ? <Statistics
+              movies={this.state.movies}
+              selectPage={this.selectPage}/> 
+          : selectedMovie
           ? <MovieDetail
               selectMovie={this.selectMovie}
               movieId={selectedMovie}
             />
-          : <Main movies={movies} selectMovie={this.selectMovie} removeFromCart={this.removeFromCart} addToCart={this.addToCart} isInCart={this.isInCart}/>}
+          : <Main movies={movies} selectMovie={this.selectMovie} removeFromCart={this.removeFromCart} addToCart={this.addToCart} isInCart={this.isInCart} selectPage={this.selectPage}/>
+        }
         <Cart products={cart} movies={movies} removeFromCart={this.removeFromCart}/>
       </div>
     );

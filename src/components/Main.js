@@ -54,7 +54,7 @@ export class Main extends React.Component {
     // extract properties from the state object and declare them to all listed variabled listed
     const {filters, navClosed, selectedFilter, searchValue} = this.state;
 
-    const {addToCart, isInCart, removeFromCart, movies} = this.props;
+    const {addToCart, isInCart, removeFromCart, movies, selectPage} = this.props;
 
     return (
       <main className="main-content">
@@ -63,6 +63,7 @@ export class Main extends React.Component {
           counter={this.state.counter}
           filters={filters}
           selectTab={this.selectTab}
+          selectPage={selectPage}
         />
 
         <MovieList
@@ -93,5 +94,6 @@ Main.propTypes = {
   removeFromCart: PropTypes.func.isRequired,
   selectMovie: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
-  isInCart: PropTypes.func.isRequired
+  isInCart: PropTypes.func.isRequired,
+  selectPage: PropTypes.func.isRequired
 };

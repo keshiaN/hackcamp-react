@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {FilterItems} from './FilterItems';
 
-export const FilterMenu = ({selectTab, filters, counter}) => {
+export const FilterMenu = ({selectTab, filters, counter, selectPage}) => {
   return (
     <div className="tab-filter-wrapper">
       <div className="tab-filter">
@@ -10,6 +10,7 @@ export const FilterMenu = ({selectTab, filters, counter}) => {
           counter={counter}
           filters={filters}
           selectTab={selectTab}
+          selectPage={selectPage}
         />
       </div>
     </div>
@@ -19,5 +20,6 @@ export const FilterMenu = ({selectTab, filters, counter}) => {
 FilterMenu.propTypes = {
   selectTab: PropTypes.func.isRequired,
   filters: PropTypes.array.isRequired,
-  counter: PropTypes.number.isRequired
+  counter: PropTypes.number.isRequired,
+  selectPage: PropTypes.func.isRequired
 };
