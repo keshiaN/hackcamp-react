@@ -19,6 +19,10 @@ export class Main extends React.Component {
         sideBarOpened: false
     };
 
+    static propTypes = {
+        selectMovie: PropTypes.func.isRequired
+    }
+
     selectTab = (category) => {
         // We need to update the `selected` property of the clicked category to be true.
         this.setState({
@@ -75,7 +79,8 @@ export class Main extends React.Component {
 
                 <MovieList
                     movies={this.state.movies}
-                    sideBarOpened={this.state.sideBarOpened}/>
+                    sideBarOpened={this.state.sideBarOpened}
+                    selectMovie={this.props.selectMovie}/>
                
                 <SideBar
                     openSideBar={this.openSideBar}

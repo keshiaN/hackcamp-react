@@ -15,5 +15,5 @@ export const Movie = ({data, onMovieClicked}) => {
 
 Movie.propTypes = {
   data: PropTypes.object.isRequired,
-  onMovieClicked: PropTypes.func
+  onMovieClicked: PropTypes.func.isRequired
 };

@@ -33,12 +33,14 @@ yarn start
 The application was not really in a working state when Steve had to leave.
 Your first task will be to get rid of all the errors in the console and get the app behaving again.
 The errors are mainly related to JSX syntax as this was brand new for Steve.
+=> DONE
 
 #### Divide and conquer
 Steve did not really embrace one of the key point of React.
 As you can see, there are few components and those are huge.
 Splitting out those in small and easy to understand/reuse components is therefore the first thing you should do.
 Go ahead, extract components as much as possible.
+=> DONE
 
 #### Filter all the things
 The navbar (which should now be a component on its own) contains a list of categories.
@@ -52,11 +54,13 @@ Hint:
 >! This function expects the category as a paramter.
 >! You first need to toggle the `selected` property of that category
 >! And you can then filter the movies.
+=> DONE
 
 #### Open the menu
 The filters button on the right should open the sidebar but it's not working at the moment.
 You should use the state of your component to track if the sidebar is open or not.
 When the sidebar is open, you need to add the `filter-is-visible` css class to both `div.gallery` and `div.filter`.
+=> DONE
 
 #### Search all the things
 The sidebar contains a search to help you find your favorite Spiderman movie in a few keystroke.
@@ -66,6 +70,7 @@ It's a bit broken for the moment. (How disappointing Steve ...)
 The HTML is there and you have an input field.
 You're goal is to track the content of the input field when it changes and filter the movie list accordingly.
 Note that your search should be case insensitive.
+=> DONE
 
 #### Movie detail and navigation
 Wouldn't it be great if we could see the details of a movie?
@@ -76,11 +81,13 @@ Otherwise, you should render the list of movies.
 You can use conditions in JSX to render a component or another based on some internal state.
 
 On the detail page, you will have to provide a props `goBack` which is a function that goes back to the main screen.
+==> DONE
 
 #### Counting
 You might have noticed that there is a counter on the top right corner.
 It shows 42 all the time for the moment.
 Make it show the count of movies displayed in the list (after applying the filtering).
+=> DONE
 
 ### Bonus
 - On the main page show that last movies visited

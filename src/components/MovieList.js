@@ -6,9 +6,9 @@ export class MovieList extends React.Component {
 
     static propTypes = {
         movies: PropTypes.array.isRequired,
-        sideBarOpened: PropTypes.bool.isRequired
+        sideBarOpened: PropTypes.bool.isRequired,
+        selectMovie: PropTypes.func.isRequired
     }
-
 
     render() {
         return (
@@ -17,7 +17,8 @@ export class MovieList extends React.Component {
                 {this.props.movies.map(movie =>
                     <Movie 
                         key={movie.id} 
-                        data={movie}/>
+                        data={movie}
+                        onMovieClicked={this.props.selectMovie}/>
                     )}
             </section>
         )

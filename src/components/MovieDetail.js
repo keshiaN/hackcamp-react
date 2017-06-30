@@ -8,7 +8,7 @@ import {BACKDROP_URL_780} from '../constants/urls';
  */
 export class MovieDetail extends Component {
   state = {
-    movie: movies.find(movie => movie.id === this.props.movieId)
+    movie: movies.find(movie => movie.id === this.props.selectedMovie)
   };
 
   render() {
@@ -22,7 +22,7 @@ export class MovieDetail extends Component {
 
           <p>{overview}</p>
 
-          <button className="btn btn-primary">Back</button>
+          <button className="btn btn-primary" onClick={() => this.props.selectMovie(null)}>Back</button>
         </div>
         <div className="card-footer">
           <small className="text-muted">Out since {release_date}</small>
@@ -34,6 +34,7 @@ export class MovieDetail extends Component {
 }
 
 MovieDetail.propTypes = {
-  movieId: PropTypes.number.isRequired,
-  goBack: PropTypes.func.isRequired
+  selectedMovie: PropTypes.number.isRequired,
+  goBack: PropTypes.func.isRequired,
+  selectMovie: PropTypes.func.isRequired
 };
