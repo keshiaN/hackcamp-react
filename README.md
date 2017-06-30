@@ -90,7 +90,7 @@ In the statistics page we want to see 3 things:
 * A button that will send us back to the Main page
 
 We need to create the page from scratch.
-=> 
+=> DONE
 
 ### Bonus
 * Display on the movie hover the number of comments
